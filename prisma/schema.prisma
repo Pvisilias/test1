@@ -1,0 +1,24 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+model Session {
+  id          String   @id
+  shop        String
+  state       String
+  isOnline    Boolean  @default(false)
+  scope       String?
+  expires     DateTime? @db.Timestamptz // for timestamp with timezone
+  accessToken String
+  userId      BigInt?  @db.BigInt
+}
+
